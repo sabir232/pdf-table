@@ -1,0 +1,103 @@
+<!--<div>
+  <h1>Pdf Generator</h1>
+  <div class="table-view">
+    <table border="1" id="my-table">
+      <tr>
+        <th>Pdf</th>
+        <th>File</th>
+      </tr>
+      <tr *ngFor="let url of cachedImages; let i = index">
+        <td>Pdf {{ i + 1 }}</td>
+        <td>
+          <img [src]="url" *ngIf="url; else placeholder" />
+          <ng-template #placeholder>Loading...</ng-template>
+        </td>
+      </tr>
+      <tr>
+        <td>Pdf 3</td>
+        <td>File 3</td>
+      </tr>
+      <tr>
+        <td>Pdf 4</td>
+        <td>File 4</td>
+      </tr>
+    </table>
+  </div>
+  <br />
+  <br />
+  <div class="table-view">
+    <button (click)="generatePdf()">Generate Pdf</button>
+  </div>
+</div>-->
+
+<div>
+  <h1>Image Analytics Data</h1>
+  <table id="my-table">
+    <thead>
+      <tr>
+        <th>Camera Name</th>
+        <th>Department Name</th>
+        <th class="remove">Timestamp</th>
+        <th>Image</th>
+        <th class="remove">Analytics Data</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let message of messages">
+        <td>{{ message.camera_name }}</td>
+        <td>{{ message.department }}</td>
+        <td class="remove">{{ message.timestamp }}</td>
+        <td>
+          <ul>
+            <li *ngFor="let img of message.imagename">
+              <img
+                *ngIf="imagesUrl[img]"
+                [src]="imagesUrl[img]"
+                alt="{{ img }}"
+                width="300px"
+              />
+            </li>
+          </ul>
+        </td>
+        <td class="remove">
+          <ul *ngIf="message.analytics_data && message.analytics_data.data">
+            <li *ngFor="let data of message.analytics_data.data">
+              ROI: {{ data.ROI }}<br />
+              ROI_bbox: {{ data.ROI_bbox }}<br />
+              Class Name: {{ data.class_name }}<br />
+              Count: {{ data.count }}<br />
+              Set Count: {{ data.set_count }}<br />
+              Violation Type: {{ data.violation_type }}<br />
+            </li>
+          </ul>
+          <div
+            *ngIf="
+              !message.analytics_data ||
+              !message.analytics_data.data ||
+              message.analytics_data.data.length === 0
+            "
+          >
+            No analytics data available
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="pagination-controls">
+  <!--<button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+  <span>Page {{ currentPage }} of {{ totalPages }}</span>
+  <button (click)="nextPage()" [disabled]="currentPage === totalPages">
+    Next
+  </button>-->
+  <!--<button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+  <span>Page {{ currentPage }} of {{ totalPages }}</span>
+  <button (click)="nextPage()" [disabled]="currentPage === totalPages">
+    Next
+  </button>-->
+</div>
+
+<div class="table-view">
+  <button (click)="generatePdf()">Generate Pdf</button>
+</div>
